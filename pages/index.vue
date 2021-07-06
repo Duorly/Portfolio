@@ -3,7 +3,6 @@
     <Loader v-if="isLoading" />
     <!-- Page Content-->
     <div v-else class="container-fluid p-0">
-
       <!-- About-->
       <section class="resume-section" id="about">
         <div class="resume-section-content">
@@ -117,21 +116,9 @@
           </ul>
           <div class="subheading mb-3">{{ $t("workflow") }}</div>
           <ul class="fa-ul mb-0">
-            <li>
+            <li v-for="wf in workflow" :key="wf.id">
               <span class="fa-li"><i class="fas fa-check"></i></span>
-              Mobile-First, Responsive Design
-            </li>
-            <li>
-              <span class="fa-li"><i class="fas fa-check"></i></span>
-              Cross Browser Testing & Debugging
-            </li>
-            <li>
-              <span class="fa-li"><i class="fas fa-check"></i></span>
-              Cross Functional Teams
-            </li>
-            <li>
-              <span class="fa-li"><i class="fas fa-check"></i></span>
-              Agile Development & Scrum
+                {{wf.titre}}
             </li>
           </ul>
         </div>
@@ -140,75 +127,33 @@
       <!-- Interests-->
       <section class="resume-section" id="interests">
         <div class="resume-section-content">
-          <h2 class="mb-5">Intérêts</h2>
+          <h2 class="mb-5">{{ $t("interet") }}</h2>
           <p>
-            {{profile.interet}}
+            {{ profile.interet }}
           </p>
-          <p class="mb-0">
-          </p>
+          <p class="mb-0"></p>
         </div>
       </section>
       <hr class="m-0" />
       <!-- Awards-->
       <section class="resume-section" id="awards">
         <div class="resume-section-content">
-          <h2 class="mb-5">{{ $t('prix') }}</h2>
+          <h2 class="mb-5">{{ $t("prix") }}</h2>
           <ul class="fa-ul mb-0">
-            <li>
+            <li v-for="certification in certifications" :key="certification.id">
               <span class="fa-li"
-                ><i class="fas fa-trophy text-warning"></i
+                ><i :class="`${certification.icon} ${certification.color}`"></i
               ></span>
-              Google Analytics Certified Developer
+              {{ certification.titre }}
             </li>
-            <li>
-              <span class="fa-li"
-                ><i class="fas fa-award text-success"></i
-              ></span>
-              Mobile Web Specialist - Google Certification
-            </li>
-            <li>
-              <span class="fa-li"
-                ><i class="fas fa-certificate text-success"></i
-              ></span>
-              1
-              <sup>st</sup>
-              Place - University of Colorado Boulder - Emerging Tech Competition
-              2009
-            </li>
-            <li>
-              <span class="fa-li"
-                ><i class="fas fa-trophy text-warning"></i
-              ></span>
-              1
-              <sup>st</sup>
-              Place - University of Colorado Boulder - Adobe Creative Jam 2008
-              (UI Design Category)
-            </li>
-            <li>
-              <span class="fa-li"
-                ><i class="fas fa-trophy text-warning"></i
-              ></span>
-              2
-              <sup>nd</sup>
-              Place - University of Colorado Boulder - Emerging Tech Competition
-              2008
-            </li>
-            <li>
+            <!-- <li>
               <span class="fa-li"
                 ><i class="fas fa-trophy text-warning"></i
               ></span>
               1
               <sup>st</sup>
               Place - James Buchanan High School - Hackathon 2006
-            </li>
-            <li>
-              <span class="fa-li"
-                ><i class="fas fa-trophy text-warning"></i
-              ></span>
-              3
-              <sup>rd</sup>
-              Place - James Buchanan High School - Hackathon 2005
-            </li>
+            </li> -->
           </ul>
         </div>
       </section>
@@ -225,11 +170,13 @@ export default {
       adresses: {},
       profile: {},
       formations: [],
-      skills: []
+      certifications: [],
+      skills: [],
+      workflow: []
     };
   },
   async mounted() {
-    this.isLoading = true
+    this.isLoading = true;
 
     this.experiences = await this.$strapi.find("experiences", [
       ["_locale", this.$i18n.locale]
@@ -243,9 +190,16 @@ export default {
     this.formations = await this.$strapi.find("formations", [
       ["_locale", this.$i18n.locale]
     ]);
+    this.certifications = await this.$strapi.find("certifications", [
+      ["_locale", this.$i18n.locale]
+    ]);
+    this.workflow = await this.$strapi.find("workflows", [
+      ["_locale", this.$i18n.locale]
+    ]);
     this.skills = await this.$strapi.find("skills");
 
-    this.isLoading = false
+
+    this.isLoading = false;
   }
 };
 </script>

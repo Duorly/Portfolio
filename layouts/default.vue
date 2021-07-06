@@ -13,7 +13,7 @@
         <span class="d-none d-lg-block"
           ><img
             class="img-fluid img-profile rounded-circle mx-auto mb-2"
-            :src="`https://strapi-portfoliobackend.herokuapp.com${profile.pic.url}`"
+            :src="`/assets/img/profile.jpg`"
             alt="Nebel"
         /></span>
       </a>
