@@ -92,7 +92,7 @@ export default {
   ],
 
   strapi: {
-    url: 'http://localhost:1337'
+    url: 'https://strapi-portfoliobackend.herokuapp.com/'
   },
 
   i18n: {
