@@ -1,0 +1,85 @@
+<template>
+<section class="bg-animation">
+    <div title="404">404</div>
+    <div title="NOT FOUND">NOT FOUND</div>
+</section>
+
+</template>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+section{
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: #fff 2px dotted;
+  color: #fff;
+  font-size: 96px;
+  font-family: 'Fira Mono', monospace;
+  letter-spacing: -7px;
+  flex-direction: column;
+}
+
+div{
+  animation: glitch 2s linear infinite;
+}
+
+@keyframes glitch{
+  2%,64%{
+    transform: translate(2px,0) skew(0deg);
+  }
+  4%,60%{
+    transform: translate(-2px,0) skew(0deg);
+  }
+  62%{
+    transform: translate(0,0) skew(5deg);
+  }
+}
+
+div:before,
+div:after{
+  content: attr(title);
+  position: absolute;
+  left: 0;
+}
+
+div:before{
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop{
+  2%,64%{
+    transform: translate(2px,-2px);
+  }
+  4%,60%{
+    transform: translate(-2px,2px);
+  }
+  62%{
+    transform: translate(13px,-1px) skew(-13deg);
+  }
+}
+
+div:after{
+  animation: glitchBotom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBotom{
+  2%,64%{
+    transform: translate(-2px,0);
+  }
+  4%,60%{
+    transform: translate(-2px,0);
+  }
+  62%{
+    transform: translate(-22px,5px) skew(21deg);
+  }
+}
+</style>
