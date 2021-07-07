@@ -23,26 +23,10 @@
             {{ profile.biographie }}
           </p>
           <div class="social-icons">
-            <a
+            <a v-for="social in links" :key="social.id"
               class="social-icon bg-animation"
-              href="https://www.linkedin.com/in/duorli-massengo/"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-            <a class="social-icon" href="https://github.com/Duorly"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a
-              class="social-icon bg-animation"
-              href="https://twitter.com/maitre_padawane"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              class="social-icon"
-              href="https://www.facebook.com/duorly.massengo/"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a class="social-icon bg-animation" href="https://nebeldev.com"
-              ><i class="fab fa-wordpress"></i
+              :href="social.link"
+              ><i :class="social.icon"></i
             ></a>
           </div>
         </div>
@@ -118,7 +102,7 @@
           <ul class="fa-ul mb-0">
             <li v-for="wf in workflow" :key="wf.id">
               <span class="fa-li"><i class="fas fa-check"></i></span>
-                {{wf.titre}}
+              {{ wf.titre }}
             </li>
           </ul>
         </div>
@@ -172,7 +156,8 @@ export default {
       formations: [],
       certifications: [],
       skills: [],
-      workflow: []
+      workflow: [],
+      links: [],
     };
   },
   async mounted() {
@@ -196,8 +181,8 @@ export default {
     this.workflow = await this.$strapi.find("workflows", [
       ["_locale", this.$i18n.locale]
     ]);
+    this.links = await this.$strapi.find("social-networks");
     this.skills = await this.$strapi.find("skills");
-
 
     this.isLoading = false;
   }
