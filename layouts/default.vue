@@ -90,7 +90,7 @@
         </ul>
       </div>
     </nav>
-    <Nuxt />
+    <Nuxt keep-alive :keep-alive-props="{ max: 3 }" />
   </div>
 </template>
 
@@ -111,6 +111,13 @@ export default {
 </script>
 
 <style>
+a.nuxt-link-active {
+  font-weight: bold;
+}
+/* exact link will show the primary color for only the exact matching link */
+a.nuxt-link-exact-active {
+  color: #00c58e;
+}
 a {
   cursor: pointer;
 }

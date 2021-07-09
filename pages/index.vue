@@ -6,7 +6,7 @@
       <!-- About-->
       <section class="resume-section" id="about">
         <div class="resume-section-content">
-          <div class="wrapper">
+          <div class="wrapper animate__animated animate__backInLeft">
             <div class="typing-demo">
               <h1 class="mb-0">
                 {{ profile.Prenoms }}
@@ -14,16 +14,18 @@
               </h1>
             </div>
           </div>
-          <div class="subheading mb-5">
+          <div class="subheading mb-5 animate__animated animate__backInLeft">
             {{ adresses.Adresse }} · {{ adresses.Ville }} ·
             {{ adresses.Pays }} • {{ adresses.Tel }} ·
             <a :href="`mailto:${adresses.Mail}`">{{ adresses.Mail }}</a>
           </div>
-          <p class="lead mb-5">
+          <p class="lead mb-5 animate__animated animate__backInLeft">
             {{ profile.biographie }}
           </p>
-          <div class="social-icons">
-            <a v-for="social in links" :key="social.id"
+          <div class="social-icons animate__animated animate__backInLeft">
+            <a
+              v-for="social in links"
+              :key="social.id"
               class="social-icon bg-animation"
               :href="social.link"
               ><i :class="social.icon"></i
@@ -157,34 +159,40 @@ export default {
       certifications: [],
       skills: [],
       workflow: [],
-      links: [],
+      links: []
     };
   },
-  async mounted() {
+  async fetch() {
     this.isLoading = true;
 
-    this.experiences = await this.$strapi.find("experiences", [
-      ["_locale", this.$i18n.locale]
-    ]);
     this.adresses = await this.$strapi.find("adresse", [
       ["_locale", this.$i18n.locale]
     ]);
     this.profile = await this.$strapi.find("profile", [
       ["_locale", this.$i18n.locale]
     ]);
+
+    this.links = await this.$strapi.find("social-networks");
+
+    this.isLoading = false;
+
+    this.experiences = await this.$strapi.find("experiences", [
+      ["_locale", this.$i18n.locale]
+    ]);
     this.formations = await this.$strapi.find("formations", [
       ["_locale", this.$i18n.locale]
     ]);
+
+    this.skills = await this.$strapi.find("skills");
+
+        this.workflow = await this.$strapi.find("workflows", [
+      ["_locale", this.$i18n.locale]
+    ]);
+
     this.certifications = await this.$strapi.find("certifications", [
       ["_locale", this.$i18n.locale]
     ]);
-    this.workflow = await this.$strapi.find("workflows", [
-      ["_locale", this.$i18n.locale]
-    ]);
-    this.links = await this.$strapi.find("social-networks");
-    this.skills = await this.$strapi.find("skills");
 
-    this.isLoading = false;
   }
 };
 </script>
