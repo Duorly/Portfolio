@@ -88,7 +88,7 @@
         </ul>
       </div>
     </nav>
-    <particles-bg color="#500070" type="cobweb" :bg="true" />
+
     <Nuxt keep-alive :keep-alive-props="{ max: 4 }" />
   </div>
 </template>

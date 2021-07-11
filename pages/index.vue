@@ -1,7 +1,9 @@
 <template>
   <div>
+    <particles-bg type="cobweb" :bg="true" />
 
     <Loader v-if="isLoading" />
+    
     <!-- Page Content-->
     <div v-else class="container-fluid p-0">
       <!-- About-->
