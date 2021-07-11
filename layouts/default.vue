@@ -1,6 +1,6 @@
 <template>
   <div id="page-top">
-    <audio src="/assets/cono.opus" autoplay loop></audio>
+    <audio id="myAudio" src="/assets/cono.opus" autoplay loop></audio>
     <nav
       class="navbar navbar-expand-lg navbar-dark bg-animation fixed-top"
       id="sideNav"
@@ -9,11 +9,11 @@
         @click="$router.push(localePath('/'))"
         class="navbar-brand js-scroll-trigger"
       >
-        <span class="d-block d-lg-none">{{profile.Prenoms}}</span>
+        <span class="d-block d-lg-none"><img width="200" class="img-fluid" src="/assets/img/logo.png" alt=""></span>
         <span class="d-none d-lg-block"
           ><img
             class="img-fluid img-profile rounded-circle mx-auto mb-2"
-            :src="`/assets/img/profile.jpg`"
+            src="/assets/img/profile.jpg"
             alt="Nebel"
         /></span>
       </a>
@@ -74,23 +74,22 @@
                 src="https://img.icons8.com/color/48/000000/france-circular.png"
               />
             </nuxt-link>
-            <!-- <nuxt-link :to="localePath('blog')">
-              <img
-                class="border border-white rounded-circle bg-primary"
-                src="https://img.icons8.com/color/48/000000/france-circular.png"
-              />
-            </nuxt-link> -->
             <nuxt-link :to="switchLocalePath('en')">
               <img
                 class="border border-white rounded-circle bg-primary"
                 src="https://img.icons8.com/color/48/000000/usa-circular.png"
               />
             </nuxt-link>
+            <hr class="d-none d-lg-block" style="background-color: white" />
+            <div class="text-center d-none d-lg-block">
+              <img class="img-fluid" src="/assets/img/logo.png" alt="">
+            </div>
           </li>
         </ul>
       </div>
     </nav>
-    <Nuxt keep-alive :keep-alive-props="{ max: 3 }" />
+    <particles-bg color="#500070" type="cobweb" :bg="true" />
+    <Nuxt keep-alive :keep-alive-props="{ max: 4 }" />
   </div>
 </template>
 
@@ -99,13 +98,13 @@ export default {
   data() {
     return {
       menu: false,
-      profile: {}
     };
   },
   async fetch() {
-    this.profile = await this.$strapi.find("profile", [
-      ["_locale", this.$i18n.locale]
-    ]);
+
+  },
+  mounted() {
+    document.getElementById("myAudio").volume = 0.1;
   }
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <Loader v-if="isLoading" />
     <!-- Page Content-->
     <div v-else class="container-fluid p-0">
@@ -24,6 +25,7 @@
           </p>
           <div class="social-icons animate__animated animate__backInLeft">
             <a
+              target="_blank"
               v-for="social in links"
               :key="social.id"
               class="social-icon bg-animation"
@@ -126,20 +128,12 @@
         <div class="resume-section-content">
           <h2 class="mb-5">{{ $t("prix") }}</h2>
           <ul class="fa-ul mb-0">
-            <li v-for="certification in certifications" :key="certification.id">
+            <li class="animate__animated animate__backInLeft" v-for="certification in certifications" :key="certification.id">
               <span class="fa-li"
                 ><i :class="`${certification.icon} ${certification.color}`"></i
               ></span>
               {{ certification.titre }}
             </li>
-            <!-- <li>
-              <span class="fa-li"
-                ><i class="fas fa-trophy text-warning"></i
-              ></span>
-              1
-              <sup>st</sup>
-              Place - James Buchanan High School - Hackathon 2006
-            </li> -->
           </ul>
         </div>
       </section>
@@ -190,9 +184,15 @@ export default {
     ]);
 
     this.certifications = await this.$strapi.find("certifications", [
-      ["_locale", this.$i18n.locale]
+      ["_locale", this.$i18n.locale], ["_sort", "createdAt:DESC"]
     ]);
-
-  }
+  },
 };
 </script>
+
+<style>
+.particles-bg-canvas-self{
+
+  background-color: rgb(255, 255, 255);
+}
+</style>

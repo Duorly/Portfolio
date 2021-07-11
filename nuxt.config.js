@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'portfolio',
+    title: 'Nebel MASSENGO',
     meta: [{
         charset: 'utf-8'
       },
@@ -12,7 +12,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: 'Je suis un développeur Web et Mobile polyvalent avec une bonne connaissance des techniques frontales et algorithmiques, avec plus de 2 ans d’expérience.'
       },
       {
         name: 'format-detection',
@@ -35,7 +35,7 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "assets/img/favicon.ico"
+        href: "assets/img/favicon.png"
       },
       {
         href: "https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700",
@@ -64,16 +64,11 @@ export default {
     "/js/scripts.js"
   ],
 
-  loading: {
-    color: 'blue',
-    height: '5px'
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [ {src: '~/plugins/particles.js', mode: 'client'}],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -96,8 +91,7 @@ export default {
 
     ['wp-nuxt', {
       endpoint: 'https://nebeldev.com/wp-json',
-      extensions: true // For additional functions of wpapi-extensions
-      /* other options of WP-API */
+      extensions: true
     }],
   ],
 
@@ -106,9 +100,16 @@ export default {
   },
 
   i18n: {
-    locales: [
-      { code: 'en', iso: 'en-US', file: 'en.js'},
-      { code: 'fr', iso: 'fr-FR', file: 'fr.js' },
+    locales: [{
+        code: 'en',
+        iso: 'en-US',
+        file: 'en.js'
+      },
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        file: 'fr.js'
+      },
     ],
     defaultLocale: 'fr',
     langDir: 'langue/',
@@ -117,7 +118,7 @@ export default {
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      onlyOnRoot: true,  // recommended
+      onlyOnRoot: true, // recommended
     }
   },
 
@@ -135,5 +136,7 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    // transpile: ['particles-bg-vue']
+  }
 }
